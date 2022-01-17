@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="poc-1-test-suite.xml" />
+	<munit:test name="poc-1-test-suite-poc-1FlowTest" doc:id="4647dc8c-121b-4f52-9460-7d5aa41ed6c7" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="0448e680-a0e9-4977-8e5f-5131e1014944" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="callingRestEndPoint" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="45a592dd-2c1e-424a-be7a-ba5b47b6727f" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[MunitTools::getResourceAsString('doc.json')]" mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="17f44483-b71e-455e-9fb4-5fbc67c0fdcf" >
+				<munit:attributes value="#[{queryparams : { 'dest' : 'SFO'}}]" />
+				<munit:variables >
+					<munit:variable key="Dest" value="SFO" />
+				</munit:variables>
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to poc-1Flow" doc:id="2ba3f6b3-2ef2-4409-912f-f2b594f6ad43" name="poc-1Flow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="67ee6145-770c-45f5-867a-ace0c6080e25" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

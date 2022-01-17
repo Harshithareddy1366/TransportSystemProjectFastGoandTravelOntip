@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="poc-1Flow" doc:id="bfd0cc23-64f9-43f9-a8b9-0ae8e9e40ddd" >
+		<http:listener doc:name="Listener" doc:id="67fbb6da-d3e3-415f-8ca0-f881a4aa5863" path="${secure::HTTP.path}" config-ref="HTTP_Listener_config1"/>
+		<set-variable value="#[attributes.queryParams.destination]" doc:name="queryParams" doc:id="b065d426-5b9f-4dc8-92dc-45f945f5113b" variableName="Dest"/>
+		<http:request method="GET" doc:name="callingRestEndPoint" doc:id="45a592dd-2c1e-424a-be7a-ba5b47b6727f" path="${secure::Request.path}" config-ref="HTTP_Request_configuration1">
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	source : vars.Dest
+}]]]></http:query-params>
+		</http:request>
+		<ee:transform doc:name="restEndPointData" doc:id="92a41a46-433e-4758-96ee-825009bf107b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

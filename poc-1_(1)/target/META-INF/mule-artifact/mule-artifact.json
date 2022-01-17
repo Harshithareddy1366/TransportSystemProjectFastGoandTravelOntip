@@ -1,0 +1,31 @@
+{
+  "configs": [
+    "commonConfig.xml",
+    "poc-1-test-suite.xml",
+    "poc-1.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:poc-1:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.3.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedResources": [
+        "commonConfig.xml",
+        "env/poc1.yaml",
+        "log4j2.xml",
+        "poc-1.xml",
+        "doc.json",
+        "log4j2-test.xml"
+      ],
+      "includeTestDependencies": "true",
+      "exportedPackages": []
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}
