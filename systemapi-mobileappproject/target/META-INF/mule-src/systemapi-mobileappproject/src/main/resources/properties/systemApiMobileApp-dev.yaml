@@ -1,0 +1,9 @@
+httplistener:
+ host: "localhost"
+ port: "8067"
+ path: "/fastgo/{transportType}"
+Request:
+ routes:
+  url: "http://localhost:8065/fastgo/routes" 
+ schedules:
+  url: "http://localhost:8065/fastgo/schedules"   

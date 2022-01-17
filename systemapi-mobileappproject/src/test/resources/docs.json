@@ -1,0 +1,17 @@
+[
+    {
+        "toLocation": "KLG-MY",
+        "availableSeats": 8,
+        "departureDateTime": "2019-09-09T00:00:00",
+        "fromLocation": "BEN_SG",
+        "companyName": "fastGo"
+    },
+    {
+        "toLocation": "BEN_SG",
+        "availableSeats": 10,
+        "departureDateTime": "2020-12-23T00:00:00",
+        "fromLocation": "KLG_MY",
+        "companyName": "fasttgo"
+    }
+]
+
